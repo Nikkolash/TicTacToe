@@ -5,9 +5,7 @@ public class TicTacToe {
 	private char[][] board;
 	private char currentPlayer;
 	private int randomNumber = 1 + (int)(Math.random() * 100);
-	private int row = getRow();
-	private int col = getCol();
-	
+		
 	public static void main(String[]args) {
 
 		TicTacToe game = new TicTacToe();
