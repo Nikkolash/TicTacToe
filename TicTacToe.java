@@ -26,7 +26,6 @@ public class TicTacToe {
 			if(checkForWin()) {
 				System.out.println("Player " + currentPlayer + " wins!");
 				isThereAWinner = true;
-				scanner.close();
 				break;
 			}
 			changePlayer();
