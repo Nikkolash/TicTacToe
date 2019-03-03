@@ -86,9 +86,17 @@ public class TicTacToe {
 
 	//Places a marker
 	public void placeMarker(int row, int col) {
-
-		if(board[row][col] == '-') {
-			board[row][col] = currentPlayer;				
+		boolean isSpotTaken = false;
+		while(!isSpotTaken) {
+			if((board[row][col] == 'o') || (board[row][col] == 'x')) {
+				System.out.println("Spot taken try again\n");
+				changePlayer();
+				
+			}
+			else board[row][col] = '-';
+				board[row][col] = currentPlayer;	 
+				isSpotTaken = true;
+				break;
 		}	
 	}
 
