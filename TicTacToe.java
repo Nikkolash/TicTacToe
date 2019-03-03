@@ -24,7 +24,9 @@ public class TicTacToe {
 			printBoard();
 			checkForWin();
 			if(checkForWin()) {
-				System.out.println("Player " + currentPlayer + " wins!");
+				System.out.println("Player " + currentPlayer + " wins!\n");
+				//Would you like to play again?
+				playAgain();
 				isThereAWinner = true;
 				break;
 			}
@@ -90,12 +92,12 @@ public class TicTacToe {
 			if((board[row][col] == 'o') || (board[row][col] == 'x')) {
 				System.out.println("Spot taken try again\n");
 				changePlayer();
-				
+
 			}
 			else board[row][col] = '-';
-				board[row][col] = currentPlayer;	 
-				isSpotTaken = true;
-				break;
+			board[row][col] = currentPlayer;	 
+			isSpotTaken = true;
+			break;
 		}	
 	}
 
@@ -215,16 +217,52 @@ public class TicTacToe {
 		return col;
 	}
 
-	//Exceptions
-	public static void checkNumber(int input) throws tooLowException, tooHighException{
-		if(input < 0) 
-			throw new tooLowException();
-		else if(input > 2) 
-			throw new tooHighException();	
+	//Do you want to play again?
+	public void playAgain() {
+		boolean playAgain = true;
+
+		while(playAgain) {
+			try {
+				System.out.println("Play again? y/n");
+				char input = scanner.next().charAt(0);	
+				checkPlayAgain(input);
+				if(input == 'y') {
+					System.out.println("Lets play again.\n");
+					go();
+					break;
+				}
+				else if(input == 'n') {
+					System.out.println("Goodbye.");
+					playAgain = false;
+					scanner.close();
+					System.exit(1);
+				}
+			}
+			catch(invalidInputException ex) {
+				System.out.println("Invalid Input");
+				scanner.next();
+			}
+		}		 
 	}
+
+
+//Exceptions
+public static void checkNumber(int input) throws tooLowException, tooHighException{
+	if(input < 0) 
+		throw new tooLowException();
+	else if(input > 2) 
+		throw new tooHighException();	
+}
+
+public static void checkPlayAgain(int input) throws invalidInputException {
+	if((input != 'y') && (input != 'n')) {
+		throw new invalidInputException();
+	}
+}
 
 
 }	
 
+class invalidInputException extends Exception{}
 class tooHighException extends Exception{}
 class tooLowException extends Exception{}
