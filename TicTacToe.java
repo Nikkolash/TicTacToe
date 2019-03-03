@@ -5,7 +5,7 @@ public class TicTacToe {
 	private char[][] board;
 	private char currentPlayer;
 	private int randomNumber = 1 + (int)(Math.random() * 100);
-		
+
 	public static void main(String[]args) {
 
 		TicTacToe game = new TicTacToe();
@@ -19,7 +19,7 @@ public class TicTacToe {
 		System.out.println("Player " + currentPlayer + " is up first.\n");
 		printBoard();
 		while(!isThereAWinner) {
-			
+
 			placeMarker(getRow(),getCol());
 			printBoard();
 			checkForWin();
@@ -85,16 +85,11 @@ public class TicTacToe {
 	}
 
 	//Places a marker
-	public boolean placeMarker(int row, int col) {
-		if((row >= 0) && (row < 3)){
-			if((col >= 0) && (col < 3)) {
-				if(board[row][col] == '-') {
-					board[row][col] = currentPlayer;
-					return true;
-				}
-			}
-		}
-		return false;
+	public void placeMarker(int row, int col) {
+
+		if(board[row][col] == '-') {
+			board[row][col] = currentPlayer;				
+		}	
 	}
 
 	//Is the game board full?
@@ -184,7 +179,7 @@ public class TicTacToe {
 
 		return row;
 	}
-	
+
 	private int getCol() {
 		boolean isValidInput = false;
 		int col = -1;
@@ -212,7 +207,7 @@ public class TicTacToe {
 
 		return col;
 	}
-	
+
 	//Exceptions
 	public static void checkNumber(int input) throws tooLowException, tooHighException{
 		if(input < 0) 
@@ -221,55 +216,8 @@ public class TicTacToe {
 			throw new tooHighException();	
 	}
 
-	
+
 }	
 
 class tooHighException extends Exception{}
 class tooLowException extends Exception{}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
