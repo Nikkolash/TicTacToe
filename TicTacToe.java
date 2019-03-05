@@ -5,7 +5,7 @@ public class TicTacToe {
 	private char[][] board;
 	private char currentPlayer;
 	private int randomNumber = 1 + (int)(Math.random() * 100);
-
+	
 	public static void main(String[]args) {
 
 		TicTacToe game = new TicTacToe();
@@ -24,13 +24,15 @@ public class TicTacToe {
 			printBoard();
 			checkForWin();
 			if(checkForWin()) {
+				changePlayer();
 				System.out.println("Player " + currentPlayer + " wins!\n");
 				//Would you like to play again?
 				playAgain();
 				isThereAWinner = true;
+				
 				break;
 			}
-			changePlayer();
+			
 			System.out.println("Player " + currentPlayer + " is up.\n");
 		}
 	}
@@ -55,10 +57,10 @@ public class TicTacToe {
 
 	//Change player mark
 	public void changePlayer() {
-		if(currentPlayer == 'x') 
-			currentPlayer = 'o';
-		else
+		if(currentPlayer == 'o') 
 			currentPlayer = 'x';
+		else
+			currentPlayer = 'o';
 	}	
 
 	//Print game board
@@ -91,14 +93,17 @@ public class TicTacToe {
 		while(!isSpotTaken) {
 			if((board[row][col] == 'o') || (board[row][col] == 'x')) {
 				System.out.println("Spot taken try again\n");
-				changePlayer();
-
+				return;
 			}
-			else board[row][col] = '-';
-			board[row][col] = currentPlayer;	 
-			isSpotTaken = true;
-			break;
+			else 
+				board[row][col] = currentPlayer;
+				changePlayer();
+				isSpotTaken = true;
+				break;
 		}	
+	}
+	public void placeAMarker(int row,int col) {
+		
 	}
 
 	//Is the game board full?
@@ -246,19 +251,19 @@ public class TicTacToe {
 	}
 
 
-//Exceptions
-public static void checkNumber(int input) throws tooLowException, tooHighException{
-	if(input < 0) 
-		throw new tooLowException();
-	else if(input > 2) 
-		throw new tooHighException();	
-}
-
-public static void checkPlayAgain(int input) throws invalidInputException {
-	if((input != 'y') && (input != 'n')) {
-		throw new invalidInputException();
+	//Exceptions
+	public static void checkNumber(int input) throws tooLowException, tooHighException{
+		if(input < 0) 
+			throw new tooLowException();
+		else if(input > 2) 
+			throw new tooHighException();	
 	}
-}
+
+	public static void checkPlayAgain(int input) throws invalidInputException {
+		if((input != 'y') && (input != 'n')) {
+			throw new invalidInputException();
+		}
+	}
 
 
 }	
